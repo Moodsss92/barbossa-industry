@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Inscription | Barbossa Industry</title>
+<meta name="description" content="Inscrivez votre enfant aux activités de Barbossa Industry ASBL.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,700;12..96,800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --orange:      #D4580A;
+  --orange-lt:   #F07030;
+  --orange-pale: #FDF0E8;
+  --dark:        #111010;
+  --dark2:       #1C1B1B;
+  --mid:         #3A3835;
+  --muted:       #8A8785;
+  --light:       #F5F3F0;
+  --white:       #FFFFFF;
+  --border:      rgba(0,0,0,0.08);
+  --r:           12px;
+  --r2:          24px;
+  --r3:          999px;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Inter', sans-serif; background: var(--light); color: var(--dark); overflow-x: hidden; line-height: 1.6; }
+h1,h2,h3 { font-family: 'Bricolage Grotesque', sans-serif; line-height: 1.08; letter-spacing: -0.03em; }
+a { text-decoration: none; color: inherit; }
+
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-thumb { background: var(--orange); border-radius: 5px; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  height: 68px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 5vw;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 1px 0 var(--border);
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; color: var(--dark); }
+.logo-mark {
+  width: 38px; height: 38px; border-radius: 10px; background: var(--orange);
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Bricolage Grotesque', sans-serif; font-weight: 800; font-size: 17px;
+  color: white; flex-shrink: 0; letter-spacing: -1px;
+}
+.logo-name { font-family: 'Bricolage Grotesque', sans-serif; font-weight: 700; font-size: 16px; letter-spacing: -0.02em; }
+.logo-name em { font-style: normal; color: var(--orange); }
+.nav-links { display: flex; align-items: center; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 13.5px; font-weight: 500; color: var(--muted); transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--orange); }
+.nav-cta { background: var(--orange); color: white !important; padding: 9px 22px; border-radius: var(--r3); font-weight: 600 !important; }
+.nav-cta:hover { background: var(--orange-lt) !important; }
+.hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; padding: 4px; cursor: pointer; }
+.hamburger span { display: block; width: 24px; height: 2px; background: var(--dark); border-radius: 2px; }
+.nav-mobile { display: none; position: fixed; top: 68px; left: 0; right: 0; background: var(--white); border-bottom: 1px solid var(--border); padding: 1.25rem 5vw 1.75rem; z-index: 199; flex-direction: column; }
+.nav-mobile.open { display: flex; }
+.nav-mobile a { font-size: 15px; font-weight: 500; color: var(--mid); padding: 12px 0; border-bottom: 1px solid var(--border); }
+.nav-mobile a:last-child { border-bottom: none; color: var(--orange); font-weight: 600; }
+
+/* ── HERO ── */
+.hero {
+  background: var(--dark2);
+  padding: 130px 5vw 80px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 70% 80% at 50% 0%, rgba(212,88,10,0.22) 0%, transparent 65%);
+  pointer-events: none;
+}
+.hero-inner { max-width: 620px; margin: 0 auto; position: relative; z-index: 1; }
+.label { display: block; font-size: 11px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; color: var(--orange); margin-bottom: 1rem; }
+.hero h1 { font-size: clamp(2.6rem, 5.5vw, 4.2rem); font-weight: 800; color: var(--white); letter-spacing: -0.04em; margin-bottom: 1.25rem; }
+.hero-sub { font-size: 1.05rem; color: rgba(255,255,255,0.5); line-height: 1.75; font-weight: 300; max-width: 480px; margin: 0 auto; }
+
+/* ── PAGE LAYOUT ── */
+.page {
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 60px 5vw 100px;
+  display: grid;
+  grid-template-columns: 1fr 320px;
+  gap: 2.5rem;
+  align-items: start;
+}
+
+/* ── FORM CARD ── */
+.form-card {
+  background: var(--white);
+  border-radius: var(--r2);
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+}
+
+.form-card-header {
+  padding: 2rem 2.5rem 1.75rem;
+  border-bottom: 1px solid var(--border);
+  display: flex; align-items: center; gap: 1rem;
+}
+.header-icon {
+  width: 46px; height: 46px; border-radius: 12px;
+  background: var(--orange-pale); display: flex; align-items: center; justify-content: center;
+  font-size: 1.3rem; flex-shrink: 0;
+}
+.form-card-header h2 { font-size: 1.2rem; font-weight: 700; color: var(--dark); letter-spacing: -0.02em; }
+.form-card-header p { font-size: 12.5px; color: var(--muted); margin-top: 2px; }
+
+.form-card-body { padding: 2rem 2.5rem 2.5rem; }
+
+/* ── FORM FIELDS ── */
+.section-label {
+  font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: var(--muted);
+  padding-bottom: 0.75rem; border-bottom: 1px solid var(--border);
+  margin-bottom: 1.25rem; margin-top: 0.25rem;
+}
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+.fg {
+  display: flex; flex-direction: column; gap: 6px; margin-bottom: 1rem;
+}
+.fg label {
+  font-size: 12px; font-weight: 600; text-transform: uppercase;
+  letter-spacing: 0.08em; color: var(--muted);
+}
+.fg label .req { color: var(--orange); margin-left: 2px; }
+
+.fg input, .fg select, .fg textarea {
+  width: 100%; padding: 11px 16px;
+  background: var(--light); border: 1.5px solid transparent;
+  border-radius: var(--r); font-family: 'Inter', sans-serif;
+  font-size: 14px; color: var(--dark); transition: border-color 0.2s, background 0.2s;
+}
+.fg input:focus, .fg select:focus, .fg textarea:focus {
+  outline: none; border-color: var(--orange); background: var(--white);
+}
+.fg input::placeholder, .fg textarea::placeholder { color: #C5C1BC; }
+.fg select { appearance: none; cursor: pointer; }
+
+/* Activité type */
+.type-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem;
+  margin-bottom: 1.5rem;
+}
+.type-opt input[type="radio"] { position: absolute; opacity: 0; width: 0; height: 0; }
+.type-opt label {
+  display: flex; flex-direction: column; align-items: center;
+  gap: 8px; padding: 1.2rem 0.75rem;
+  background: var(--light); border: 2px solid transparent;
+  border-radius: var(--r); cursor: pointer; text-align: center;
+  font-size: 13px; font-weight: 500; color: var(--mid);
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+}
+.type-opt label .ico { font-size: 1.6rem; }
+.type-opt input:checked + label { border-color: var(--orange); background: var(--orange-pale); color: var(--orange); }
+
+/* Consent */
+.consent-list { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 0.5rem; }
+.cb-item { display: flex; align-items: flex-start; gap: 12px; cursor: pointer; }
+.cb-item input[type="checkbox"] {
+  width: 18px; height: 18px; min-width: 18px;
+  border-radius: 5px; border: 2px solid var(--border);
+  appearance: none; background: var(--light); cursor: pointer;
+  margin-top: 2px; transition: background 0.2s, border-color 0.2s;
+  background-repeat: no-repeat; background-position: center;
+}
+.cb-item input:checked {
+  background-color: var(--orange); border-color: var(--orange);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='8' viewBox='0 0 10 8'%3E%3Cpath d='M1 4l2.5 2.5L9 1' stroke='white' stroke-width='1.8' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+}
+.cb-text { font-size: 13px; color: var(--mid); line-height: 1.55; }
+.cb-text a { color: var(--orange); font-weight: 500; }
+
+/* Submit */
+.btn-submit {
+  width: 100%; padding: 15px;
+  background: var(--orange); color: white; border: none;
+  border-radius: var(--r3); font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 16px; font-weight: 700; cursor: pointer;
+  transition: background 0.2s, transform 0.15s;
+  margin-top: 1.25rem; letter-spacing: -0.01em;
+}
+.btn-submit:hover { background: var(--orange-lt); transform: translateY(-1px); }
+
+/* Success */
+.success-screen {
+  display: none; text-align: center; padding: 4rem 2rem;
+}
+.success-icon {
+  width: 80px; height: 80px;
+  background: rgba(26,158,92,0.1); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 2.2rem; margin: 0 auto 1.5rem;
+}
+.success-screen h2 { font-size: 1.8rem; font-weight: 800; color: var(--dark); margin-bottom: 0.75rem; }
+.success-screen p { font-size: 0.95rem; color: var(--muted); max-width: 340px; margin: 0 auto 2rem; line-height: 1.7; font-weight: 300; }
+.btn-back {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--dark); color: white; padding: 12px 24px;
+  border-radius: var(--r3); font-weight: 600; font-size: 14px;
+  transition: background 0.2s;
+}
+.btn-back:hover { background: var(--mid); }
+
+/* ── SIDEBAR ── */
+.sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
+
+.wa-card {
+  background: var(--dark2); border-radius: var(--r2);
+  padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;
+}
+.wa-card p { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.65; }
+.wa-card strong { color: var(--white); }
+.wa-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: #25D366; color: white; padding: 10px 18px;
+  border-radius: var(--r3); font-weight: 600; font-size: 13.5px;
+  transition: background 0.2s; align-self: flex-start;
+}
+.wa-btn:hover { background: #20BD5A; }
+
+.info-card {
+  background: var(--white); border-radius: var(--r2);
+  border: 1.5px solid var(--border); overflow: hidden;
+}
+.info-card-header {
+  padding: 1.1rem 1.5rem; border-bottom: 1px solid var(--border);
+  font-family: 'Bricolage Grotesque', sans-serif;
+  font-size: 14px; font-weight: 700; color: var(--dark);
+}
+.info-card-body { padding: 1.25rem 1.5rem; display: flex; flex-direction: column; gap: 1rem; }
+.info-item { display: flex; gap: 12px; align-items: flex-start; }
+.info-icon {
+  width: 34px; height: 34px; border-radius: 9px;
+  background: var(--orange-pale); display: flex; align-items: center;
+  justify-content: center; font-size: 1rem; flex-shrink: 0;
+}
+.info-item h4 { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--muted); margin-bottom: 2px; }
+.info-item a { font-size: 13px; color: var(--orange); font-weight: 500; }
+
+.note-card {
+  background: var(--orange-pale); border-radius: var(--r2);
+  border: 1.5px solid rgba(212,88,10,0.15);
+  padding: 1.5rem;
+}
+.note-card p { font-size: 13px; color: var(--mid); line-height: 1.65; }
+.note-card strong { color: var(--orange); }
+
+/* ── ANIMATIONS ── */
+.reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.d1 { transition-delay: 0.1s; } .d2 { transition-delay: 0.2s; } .d3 { transition-delay: 0.3s; }
+
+/* ── FOOTER ── */
+footer { background: var(--dark); padding: 28px 5vw; }
+.footer-bottom { display: flex; justify-content: space-between; align-items: center; font-size: 12.5px; color: rgba(255,255,255,0.35); flex-wrap: wrap; gap: 1rem; }
+.social-links { display: flex; gap: 10px; }
+.social-link { width: 34px; height: 34px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.12); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,0.35); font-size: 12px; font-weight: 600; transition: border-color 0.2s, color 0.2s; }
+.social-link:hover { border-color: var(--orange); color: var(--orange); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 860px) { .page { grid-template-columns: 1fr; } }
+@media (max-width: 640px) {
+  .nav-links { display: none; } .hamburger { display: flex; }
+  .form-row { grid-template-columns: 1fr; }
+  .form-card-body { padding: 1.5rem; }
+  .form-card-header { padding: 1.5rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="barbossa-industry.html" class="nav-logo">
+    <div class="logo-mark">BI</div>
+    <span class="logo-name">Barbossa <em>Industry</em></span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="barbossa-industry.html">Accueil</a></li>
+    <li><a href="qui-sommes-nous.html">Qui sommes-nous</a></li>
+    <li><a href="inscription.html" class="active">Inscription</a></li>
+    <li><a href="barbossa-industry.html#faq">FAQ</a></li>
+    <li><a href="barbossa-industry.html#contact" class="nav-cta">Contact</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger"><span></span><span></span><span></span></button>
+</nav>
+<div class="nav-mobile" id="navMobile">
+  <a href="barbossa-industry.html" onclick="closeNav()">Accueil</a>
+  <a href="qui-sommes-nous.html" onclick="closeNav()">Qui sommes-nous</a>
+  <a href="inscription.html" onclick="closeNav()">Inscription</a>
+  <a href="barbossa-industry.html#faq" onclick="closeNav()">FAQ</a>
+  <a href="barbossa-industry.html#contact" onclick="closeNav()">Contact →</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="label reveal">Camp éducatif · Barbossa Industry</div>
+    <h1 class="reveal d1">Inscrivez votre enfant</h1>
+    <p class="hero-sub reveal d2">Remplissez le formulaire ci-dessous et nous vous recontactons dans les 48h pour confirmer votre place.</p>
+  </div>
+</div>
+
+<!-- PAGE -->
+<div class="page">
+
+  <!-- FORMULAIRE -->
+  <div class="form-card reveal">
+    <div class="form-card-header">
+      <div class="header-icon">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5H7a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2"/><rect x="9" y="3" width="6" height="4" rx="1"/><line x1="9" y1="12" x2="15" y2="12"/><line x1="9" y1="16" x2="13" y2="16"/></svg>
+      </div>
+      <div>
+        <h2>Formulaire d'inscription — Camp éducatif</h2>
+        <p>Tous les champs marqués d'un <span style="color:var(--orange)">*</span> sont obligatoires</p>
+      </div>
+    </div>
+
+    <div class="form-card-body" id="formBody">
+
+      <!-- Parent -->
+      <p class="section-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;margin-right:6px;vertical-align:middle"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        Informations du parent
+      </p>
+      <div class="form-row">
+        <div class="fg"><label>Prénom <span class="req">*</span></label><input type="text" placeholder="Marie"></div>
+        <div class="fg"><label>Nom <span class="req">*</span></label><input type="text" placeholder="Dupont"></div>
+      </div>
+      <div class="form-row">
+        <div class="fg"><label>Email <span class="req">*</span></label><input type="email" placeholder="marie@exemple.be"></div>
+        <div class="fg"><label>Téléphone <span class="req">*</span></label><input type="tel" placeholder="+32 470 00 00 00"></div>
+      </div>
+
+      <!-- Enfant -->
+      <p class="section-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;margin-right:6px;vertical-align:middle"><circle cx="12" cy="8" r="4"/><path d="M6 20v-1a6 6 0 0 1 12 0v1"/></svg>
+        Informations de l'enfant
+      </p>
+      <div class="form-row">
+        <div class="fg"><label>Prénom de l'enfant <span class="req">*</span></label><input type="text" placeholder="Lucas"></div>
+        <div class="fg"><label>Âge <span class="req">*</span></label>
+          <select>
+            <option value="">Sélectionner...</option>
+            <option>6 ans</option><option>7 ans</option><option>8 ans</option>
+            <option>9 ans</option><option>10 ans</option><option>11 ans</option>
+            <option>12 ans</option><option>13 ans</option><option>14 ans</option>
+            <option>15 ans</option><option>16 ans</option><option>17 ans</option>
+          </select>
+        </div>
+      </div>
+
+      <!-- Camp -->
+      <p class="section-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;margin-right:6px;vertical-align:middle"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+        Détails du camp
+      </p>
+      <div class="form-row">
+        <div class="fg"><label>Session souhaitée <span class="req">*</span></label>
+          <select>
+            <option value="">Sélectionner...</option>
+            <option>Vacances de Pâques 2025</option>
+            <option>Vacances d'été 2025 — Juillet</option>
+            <option>Vacances d'été 2025 — Août</option>
+            <option>Vacances de Toussaint 2025</option>
+            <option>À définir</option>
+          </select>
+        </div>
+        <div class="fg"><label>Ville / Région</label><input type="text" placeholder="Bruxelles, Liège..."></div>
+      </div>
+
+      <!-- Message -->
+      <p class="section-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;margin-right:6px;vertical-align:middle"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Message
+      </p>
+      <div class="fg" style="margin-bottom:1.5rem;">
+        <textarea rows="4" placeholder="Informations supplémentaires, questions, besoins spécifiques de votre enfant..."></textarea>
+      </div>
+
+      <!-- Consentements -->
+      <p class="section-label">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;margin-right:6px;vertical-align:middle"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Consentements
+      </p>
+      <div class="consent-list" style="margin-bottom:0;">
+        <label class="cb-item">
+          <input type="checkbox" id="c1">
+          <span class="cb-text">J'accepte que mes données soient utilisées dans le cadre de cette inscription. <a href="#">Politique de confidentialité</a></span>
+        </label>
+        <label class="cb-item">
+          <input type="checkbox" id="c2">
+          <span class="cb-text">Je certifie que les informations renseignées sont exactes.</span>
+        </label>
+      </div>
+
+      <button class="btn-submit" id="submitBtn" onclick="handleSubmit()">
+        Envoyer ma demande d'inscription →
+      </button>
+
+    </div>
+
+    <!-- Succès -->
+    <div class="success-screen" id="successScreen">
+      <div class="success-icon">
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="var(--green)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      </div>
+      <h2>Demande envoyée !</h2>
+      <p>Merci ! L'équipe Barbossa Industry vous recontactera dans les 48h pour confirmer votre inscription.</p>
+      <a href="barbossa-industry.html" class="btn-back">← Retour à l'accueil</a>
+    </div>
+  </div>
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+
+    <div class="wa-card reveal d1">
+      <p><strong>Préférez WhatsApp ?</strong><br>Contactez-nous directement — c'est le moyen le plus rapide.</p>
+      <a href="https://wa.me/32476379406" target="_blank" class="wa-btn">
+        <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Écrire sur WhatsApp
+      </a>
+    </div>
+
+    <div class="info-card reveal d2">
+      <div class="info-card-header">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="margin-right:8px;vertical-align:middle"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.09h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.5 5.5l.96-.96a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 21 15.14"/></svg>
+        Nous contacter
+      </div>
+      <div class="info-card-body">
+        <div class="info-item">
+          <div class="info-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div><h4>Email</h4><a href="mailto:barbossa.industryoff@gmail.com">barbossa.industryoff@gmail.com</a></div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.09h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.6a16 16 0 0 0 5.5 5.5l.96-.96a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 21 15.14"/></svg>
+          </div>
+          <div><h4>WhatsApp</h4><a href="https://wa.me/32476379406">+32 476 37 94 06</a></div>
+        </div>
+        <div class="info-item">
+          <div class="info-icon">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </div>
+          <div><h4>Instagram</h4><a href="https://instagram.com/barbossa_industryoff" target="_blank">@barbossa_industryoff</a></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="note-card reveal d3">
+      <p>
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--orange)" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="display:inline;margin-right:6px;vertical-align:middle"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        <strong>Délai de réponse :</strong> nous traitons toutes les demandes dans les <strong>48h ouvrables</strong> et vous confirmons votre place par email ou WhatsApp.
+      </p>
+    </div>
+
+  </aside>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-bottom">
+    <span>© 2025 Barbossa Industry ASBL · Tous droits réservés.</span>
+    <div class="social-links">
+      <a href="https://instagram.com/barbossa_industryoff" class="social-link" target="_blank">IG</a>
+      <a href="https://wa.me/32476379406" class="social-link">WA</a>
+      <a href="mailto:barbossa.industryoff@gmail.com" class="social-link">@</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('hamburger').addEventListener('click', () => document.getElementById('navMobile').classList.toggle('open'));
+  function closeNav() { document.getElementById('navMobile').classList.remove('open'); }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  function handleSubmit() {
+    const c1 = document.getElementById('c1').checked;
+    const c2 = document.getElementById('c2').checked;
+    if (!c1 || !c2) { alert('Veuillez cocher les deux cases de consentement.'); return; }
+    const btn = document.getElementById('submitBtn');
+    btn.textContent = 'Envoi en cours...';
+    btn.style.background = '#999';
+    btn.disabled = true;
+    setTimeout(() => {
+      document.getElementById('formBody').style.display = 'none';
+      document.getElementById('successScreen').style.display = 'block';
+    }, 1000);
+  }
+</script>
+</body>
+</html>
